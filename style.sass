@@ -1,0 +1,251 @@
+// VARIABLES
+/*Escenario*/
+$sizeRoom: 400px
+$perpective: 350px
+/*Camara*/
+$origen: 330px
+/*Colores del cubo*/
+$floor: rgb(125, 84, 54)
+$wall: #937C6B
+$ceiling: #C9AA93
+// ESTILOS GENERLES
+*
+ padding: 0
+ margin: 0
+
+body
+ width: 100%
+ height: 100vh
+ display: flex
+ justify-content: center
+ align-items: center
+
+// ANIMACIONES
+@keyframes girar
+ to
+  transform: rotateY(360deg)     
+
+@keyframes jump
+ 0%, 100%
+  bottom: 2.5em
+ 50%
+  bottom: 0.5em
+  animation-timing-function: ease-out
+
+@keyframes shadow
+ 0%, 8%, 93.5%, 100%
+  transform: scale(1) rotateX(90deg)
+  opacity: 0.4
+ 50%
+  transform: scale(1.2) rotateX(90deg)
+  opacity: 1
+  animation-timing-function: ease-out
+    
+
+//ESCENARIO
+.contenedor-room
+ background: #000
+ overflow: hidden
+ position: relative
+ width: 100%
+ height: 100vh
+ max-width: 1440px
+ max-height: 783px
+ display: flex
+ justify-content: center
+ align-items: center
+ perspective: $perpective
+ perspective-origin: 50% calc(50% - 1.5em)
+ 
+.room
+ width: $sizeRoom
+ height: $sizeRoom
+ display: flex
+ justify-content: center
+ align-items: center
+ transform-style: preserve-3d
+ transform: translateZ($origen) rotateX(-5deg)
+//  transform:  translateZ(calc( $sizeRoom / 1.5)) rotateX(-10deg)
+ 
+
+// CUBO
+.cube
+ position: relative
+ width: 100%
+ height: 100%
+ transform-style: preserve-3d
+ transition: 2s
+ transform: rotateX(0deg)
+//  animation: girar 12s linear infinite
+
+.c
+ width: 100%
+ height: 100%
+ position: absolute
+ display: flex
+ flex-direction: column
+ justify-content: center
+ align-content: center
+ background: linear-gradient( 90deg, transparent,rgba(1,1,1,0.3) 60%), $wall
+ 
+.c-1
+ background: radial-gradient(circle at center, transparent,rgba(1,1,1,0.5) 80%), linear-gradient( 90deg, black 2%,$floor 8%)
+ background-size: 100%, 5% 100%
+ background-repeat: no-repeat, repeat-x
+ transform: rotateX(90deg) translateZ(calc( $sizeRoom / -2) )
+ z-index: 100
+
+.c-2
+ transform:  translateZ(calc( $sizeRoom / -2) )
+
+.c-3
+ background: linear-gradient( 90deg,rgba(1,1,1,0.3),transparent 60%), $wall
+ transform:  rotateY(-90deg) translateZ(calc( $sizeRoom / -2))
+
+.c-4
+ transform:  rotateY(180deg) translateZ(calc( $sizeRoom / -2) )
+
+.c-5
+ background: linear-gradient( 90deg,rgba(1,1,1,0.3),transparent 60%), $wall
+ transform:  rotateY(90deg) translateZ(calc( $sizeRoom / -2) )
+
+.c-6
+ background: $ceiling
+ transform:  rotateX(90deg) translateZ(calc( $sizeRoom / 2) )
+
+.c-2, .c-3, .c-4, .c-5
+ box-shadow: 0 0 10px calc( $sizeRoom / 100) rgba(1,1,1,0.5)
+
+.titulo, .contenido, .descripcion
+ display: flex
+ justify-content: center
+ align-items: center
+.titulo
+ flex: 1
+.contenido
+ flex: 3
+.contenido > div
+ display: flex
+ justify-content: center
+ align-items: center
+.btn-1, .btn-2
+ flex: 1
+ text-align: center
+ font-family: 'Times New Roman', Times, serif
+ font-weight: bold
+ span
+  color: white
+  text-shadow: 1px 1px 5px black
+  box-shadow: 0 0 2px 0.2px black
+  width: 1em
+  height: 1em
+  border-radius: 50%
+  background: #8A3F34
+  cursor: pointer
+  display: flex
+  justify-content: center
+  align-items: center
+  transform: scale(1)
+  transition: 0.1s
+ span:hover
+  transform: scale(0.9)
+.descripcion
+ align-items: flex-start
+ flex: 2
+// ANIMACION 1
+$sizeAmination1: 15em
+$sizeContentAnimation: 150px
+$perspectiva1: 7em
+$color1:rgba(64,103,164,0.4)
+$colorBall: #665A55
+$colorBallShine:#B3A282
+
+#marco
+ overflow: hidden
+ position: relative
+ box-shadow: 0px 0px 0 1px black
+ width: $sizeContentAnimation
+ height: $sizeContentAnimation
+ display: flex
+ justify-content: center
+ align-items: center
+ background: black
+ perspective-origin: 50% calc( 50% - 0.5em )
+ perspective: $perspectiva1
+
+#escenario
+ transform-style: preserve-3d
+ position: relative
+ width: $sizeAmination1
+ height: $sizeAmination1
+ display: flex
+ justify-content: center
+ align-items: center
+ animation: girar infinite 8s linear
+
+#left, #back, #right, #front, #top, #bottom
+  position: absolute
+  box-shadow: 0 0 5px 0 black inset
+  width: 100%
+  height: 100%
+  background: $color1
+
+#right
+ transform: rotateY(-90deg) translateZ(1em)
+
+#left
+ transform: rotateY(90deg) translateZ(1em)
+
+#back
+ transform: translateZ(-1em)
+
+#front
+ transform: translateZ(1em)
+
+#top
+ transform: rotateX(90deg) translateZ(1em)
+ background: green
+
+#bottom
+ transform: rotateX(90deg) translateZ(-1em)
+#cubo
+ transform-style: preserve-3d
+ position: relative
+ top: 1em
+ width: 2em
+ height: 2em
+ z-index: 1
+
+#ball
+ position: relative
+ border-radius: 50%
+ height: 1em
+ width: 1em
+ bottom: 0.5em
+ left: 1.5em
+ box-shadow: 0 0 1px 1px $colorBall
+ background: radial-gradient(circle at top, #{$colorBallShine}, #{$colorBall})
+ animation: jump 1.2s infinite ease-in, girar 8s linear infinite reverse
+
+#piso
+ height: 15em
+ width: 15em
+ position: absolute
+ top: 2em
+ left: 0
+ box-shadow: 0 0 1px 0 inset
+ background: radial-gradient(transparent, rgb(25, 25, 25) 75% ), repeating-conic-gradient(from 45deg, rgb(50, 50, 51) 0deg 90deg, rgb(226, 226, 226) 90deg 180deg)
+ background-size: 100%, 1em 1em
+ background-position: 0.5em 0%
+ transform: rotateX(90deg)
+ transform-origin: 50% 50%
+
+#shadow
+ position: absolute
+ width: 100%
+ height: 100%
+ background: radial-gradient(black, transparent 50%)
+ transform: rotateX(90deg) translateZ(1em)
+ top: -1em
+ animation: shadow 1.2s infinite ease-in
+ 
