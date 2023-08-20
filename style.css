@@ -61,7 +61,7 @@ body {
   justify-content: center;
   align-items: center;
   transform-style: preserve-3d;
-  transform: translateZ(330px) rotateX(-5deg);
+  transform: translateZ(350px) rotateX(-3deg);
 }
 
 .cube {
@@ -70,7 +70,7 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   transition: 2s;
-  transform: rotateX(0deg);
+  transform: rotateY(0deg);
 }
 
 .c {
@@ -141,27 +141,44 @@ body {
 
 .btn-1, .btn-2 {
   flex: 1;
-  text-align: center;
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
-}
-.btn-1 span, .btn-2 span {
-  color: white;
-  text-shadow: 1px 1px 5px black;
-  box-shadow: 0 0 2px 0.2px black;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  background: #8A3F34;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-1 div, .btn-2 div {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn-1 div:hover i, .btn-2 div:hover i {
+  transform: scale(0.9);
+}
+
+i {
+  position: absolute;
+  text-align: center;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  text-shadow: 1px 1px 5px black;
+  box-shadow: 0 0 2px 0.2px black;
+  border-radius: 50%;
+  background: #8A3F34;
   transform: scale(1);
   transition: 0.1s;
-}
-.btn-1 span:hover, .btn-2 span:hover {
-  transform: scale(0.9);
 }
 
 .descripcion {
