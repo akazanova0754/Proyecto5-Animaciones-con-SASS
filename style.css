@@ -39,6 +39,25 @@ body {
     animation-timing-function: ease-out;
   }
 }
+@keyframes moveTypes {
+  100% {
+    left: 100%;
+  }
+}
+@keyframes blink {
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .contenedor-room {
   background: #000;
   overflow: hidden;
@@ -50,18 +69,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 350px;
-  perspective-origin: 50% calc(50% - 1.5em);
+  perspective: 420px;
+  perspective-origin: 50% calc(50% + 250px);
 }
 
 .room {
-  width: 400px;
-  height: 400px;
+  width: 520px;
+  height: 520px;
   display: flex;
   justify-content: center;
   align-items: center;
   transform-style: preserve-3d;
-  transform: translateZ(350px) rotateX(-3deg);
+  transform: translateZ(420px) rotateX(12deg);
 }
 
 .cube {
@@ -88,35 +107,35 @@ body {
   background: radial-gradient(circle at center, transparent, rgba(1, 1, 1, 0.5) 80%), linear-gradient(90deg, black 2%, #7d5436 8%);
   background-size: 100%, 5% 100%;
   background-repeat: no-repeat, repeat-x;
-  transform: rotateX(90deg) translateZ(-200px);
+  transform: rotateX(90deg) translateZ(-260px);
   z-index: 100;
 }
 
 .c-2 {
-  transform: translateZ(-200px);
+  transform: translateZ(-260px);
 }
 
 .c-3 {
   background: linear-gradient(90deg, rgba(1, 1, 1, 0.3), transparent 60%), #937C6B;
-  transform: rotateY(-90deg) translateZ(-200px);
+  transform: rotateY(-90deg) translateZ(-260px);
 }
 
 .c-4 {
-  transform: rotateY(180deg) translateZ(-200px);
+  transform: rotateY(180deg) translateZ(-260px);
 }
 
 .c-5 {
   background: linear-gradient(90deg, rgba(1, 1, 1, 0.3), transparent 60%), #937C6B;
-  transform: rotateY(90deg) translateZ(-200px);
+  transform: rotateY(90deg) translateZ(-260px);
 }
 
 .c-6 {
   background: #C9AA93;
-  transform: rotateX(90deg) translateZ(200px);
+  transform: rotateX(90deg) translateZ(260px);
 }
 
 .c-2, .c-3, .c-4, .c-5 {
-  box-shadow: 0 0 10px 4px rgba(1, 1, 1, 0.5);
+  box-shadow: 0 0 10px 5.2px rgba(1, 1, 1, 0.5);
 }
 
 .titulo, .contenido, .descripcion {
@@ -127,6 +146,11 @@ body {
 
 .titulo {
   flex: 1;
+  align-items: flex-end;
+  font-size: 1.2em;
+  color: #C9AA93;
+  text-shadow: 1px 1px 0 black;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 .contenido {
@@ -182,8 +206,14 @@ i {
 }
 
 .descripcion {
+  color: #4A3120;
+  text-shadow: 1px 1px 0 black;
   align-items: flex-start;
+  text-align: center;
   flex: 2;
+  font-size: 0.9em;
+  letter-spacing: 0.03em;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 #marco {
@@ -287,6 +317,163 @@ i {
   transform: rotateX(90deg) translateZ(1em);
   top: -1em;
   animation: shadow 1.2s infinite ease-in;
+}
+
+.content-ring {
+  box-shadow: 0 0 0 5px #FBAB7E inset, 0px 0px 10px 6px #4A3120 inset;
+  background-color: #FBAB7E;
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+}
+
+.ring {
+  transform-style: preserve-3d;
+  animation: girar 8s infinite linear;
+}
+
+.body-ring {
+  transform: rotateX(-10deg);
+  transform-style: preserve-3d;
+}
+
+.part {
+  border-radius: 50%;
+  box-shadow: 0 2px 0 0 rgba(168, 139, 4, 0.9) inset, 0 4px 0 0 rgba(168, 139, 4, 0.6) inset, 0 6px 0 0 rgba(168, 139, 4, 0.5) inset, 0 8px 0 0 rgba(168, 139, 4, 0.4) inset, 0 10px 0 0 rgba(168, 139, 4, 0.3) inset, 0 12px 0 0 rgba(168, 139, 4, 0.2) inset, 0 14px 0 0 rgba(168, 139, 4, 0.1) inset, 0 -2px 0 0 rgba(168, 139, 4, 0.7) inset, 0 -4px 0 0 rgba(168, 139, 4, 0.6) inset, 0 -6px 0 0 rgba(168, 139, 4, 0.5) inset, 0 -8px 0 0 rgba(168, 139, 4, 0.4) inset, 0 -10px 0 0 rgba(168, 139, 4, 0.3) inset, 0 -12px 0 0 rgba(168, 139, 4, 0.2) inset, 0 -14px 0 0 rgba(168, 139, 4, 0.1) inset;
+  transform-style: preserve-3d;
+  position: absolute;
+  background: #FCD107;
+  width: 16px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(calc(var(--j) * -10deg)) translateZ(50px);
+}
+
+.part > span {
+  font-family: "Dancing Script", cursive;
+  font-weight: bold;
+  color: #947b00;
+  text-shadow: 1px 1px 5px #fcd107;
+  transform: rotateY(180deg);
+}
+
+.content-text {
+  color: #4A3120;
+  background: #C9AA93;
+  overflow: hidden;
+  font-family: "Courier New", Courier, monospace;
+  text-shadow: 1px 1px 0 black;
+  width: 150px;
+  height: 150px;
+  box-shadow: 0 0 1px 1px black;
+}
+
+p.text-1 {
+  font-size: 16px;
+  position: relative;
+  margin: 0;
+}
+p.text-1:before, p.text-1:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+p.text-1:before {
+  /* Type */
+  width: 100%;
+  background: #C9AA93;
+  z-index: 10;
+}
+p.text-1:after {
+  /* Blink */
+  width: 3.2px;
+  height: 100%;
+  left: 0;
+  background: #937C6B;
+  z-index: 500;
+  opacity: 1;
+}
+
+.moveScene::before {
+  animation-name: moveTypes;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+  animation-timing-function: steps(10);
+  animation-delay: 1s;
+  animation-iteration-count: 1;
+}
+
+.typingEffect::after {
+  animation-name: moveTypes, blink;
+  animation-duration: 4s, 0.4s;
+  animation-fill-mode: forwards, backwards;
+  animation-timing-function: steps(10), linear;
+  animation-delay: 1s, 1s;
+  animation-iteration-count: 1, 12;
+}
+
+@keyframes caer {
+  to {
+    background-position-y: 300px;
+  }
+}
+@keyframes parallax {
+  100% {
+    transform: translateY(2px) translateX(2px);
+  }
+}
+.content-parallax {
+  width: 150px;
+  height: 150px;
+  box-shadow: 0 0 0 1px black;
+  background-image: url("img/fondo.jpg");
+  background-size: 150px 150px;
+  background-repeat: repeat-y;
+  background-position-y: 0px;
+  animation: caer linear 2s infinite;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-parallax > div {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  transform: rotateZ(10deg);
+}
+
+.alice {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 150px;
+  height: 300px;
+  z-index: 1000;
+  background-image: url("img/alice.png");
+  background-size: 150px 300px;
+  background-repeat: repeat-y;
+  background-position-y: 0px;
+  position: absolute;
+  transform: translateY(-2px) translateX(-2px);
+  animation-name: caer, parallax;
+  animation-iteration-count: infinite, infinite;
+  animation-duration: 4s, 0.5s;
+  animation-direction: normal, alternate-reverse;
+  animation-timing-function: linear, ease-in-out;
+  top: -75px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,9 +1,9 @@
 // VARIABLES
 /*Escenario*/
-$sizeRoom: 400px
-$perpective: 350px
+$sizeRoom: 520px
+$perpective: 420px
 /*Camara*/
-$origen: 350px
+$origen: 420px
 /*Colores del cubo*/
 $floor: rgb(125, 84, 54)
 $wall: #937C6B
@@ -40,7 +40,38 @@ body
   transform: scale(1.2) rotateX(90deg)
   opacity: 1
   animation-timing-function: ease-out
-    
+
+@keyframes moveTypes 
+ 100%
+    left: 100%
+@keyframes blink 
+ 25%
+    opacity: 1
+ 50%
+    opacity: 0
+ 75%
+    opacity: 1
+ 100%
+    opacity: 0
+
+// Variables
+$timeChange: 0.4s
+
+@mixin moveSceneType($numLetters: 12,$timeDelay: 1s)
+ animation-name: moveTypes
+ animation-duration: $numLetters * $timeChange
+ animation-fill-mode: forwards
+ animation-timing-function: steps($numLetters)
+ animation-delay: $timeDelay 
+ animation-iteration-count: 1
+
+@mixin typingEffect( $numLetters: 12,$timeDelay: 1s)
+ animation-name: moveTypes, blink
+ animation-duration: $numLetters * $timeChange, $timeChange
+ animation-fill-mode: forwards, backwards
+ animation-timing-function: steps($numLetters), linear
+ animation-delay: $timeDelay, $timeDelay
+ animation-iteration-count: 1, $numLetters + 2
 
 //ESCENARIO
 .contenedor-room
@@ -55,7 +86,7 @@ body
  justify-content: center
  align-items: center
  perspective: $perpective
- perspective-origin: 50% calc(50% - 1.5em)
+ perspective-origin: 50% calc(50% + 250px)
  
 .room
  width: $sizeRoom
@@ -64,7 +95,7 @@ body
  justify-content: center
  align-items: center
  transform-style: preserve-3d
- transform: translateZ($origen) rotateX(-3deg)
+ transform: translateZ($origen) rotateX(12deg)
 
 // CUBO
 .cube
@@ -118,6 +149,11 @@ body
  align-items: center
 .titulo
  flex: 1
+ align-items: flex-end
+ font-size: 1.2em
+ color: #C9AA93
+ text-shadow: 1px 1px 0 black
+ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 .contenido
  flex: 3
 .contenido > div
@@ -160,8 +196,14 @@ i
  transition: 0.1s
 
 .descripcion
+ color: #4A3120
+ text-shadow: 1px 1px 0 black
  align-items: flex-start
+ text-align: center
  flex: 2
+ font-size: 0.9em
+ letter-spacing: 0.03em
+ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 // ANIMACION 1
 $sizeAmination1: 15em
 $sizeContentAnimation: 150px
@@ -258,4 +300,144 @@ $colorBallShine:#B3A282
  transform: rotateX(90deg) translateZ(1em)
  top: -1em
  animation: shadow 1.2s infinite ease-in
- 
+
+// ANIMACION 2
+
+$sizeContentAnimation2: 150px
+$colorRing: rgb(148, 123, 0)
+.content-ring
+ box-shadow: 0 0 0 5px #FBAB7E inset, 0px 0px 10px 6px #4A3120 inset
+ background-color: #FBAB7E
+ background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)
+ display: flex
+ justify-content: center
+ align-items: center
+ width: $sizeContentAnimation2
+ height: $sizeContentAnimation2
+
+.ring
+ transform-style: preserve-3d
+ animation: girar 8s infinite linear
+
+.body-ring
+ transform: rotateX(-10deg)
+ transform-style: preserve-3d
+
+.part
+ border-radius:50%
+ box-shadow: 0 2px 0 0 rgba(168, 139, 4,0.9) inset, 0 4px 0 0 rgba(168, 139, 4,0.6) inset, 0 6px 0 0 rgba(168, 139, 4,0.5) inset, 0 8px 0 0 rgba(168, 139, 4,0.4) inset, 0 10px 0 0 rgba(168, 139, 4,0.3) inset, 0 12px 0 0 rgba(168, 139, 4,0.2) inset, 0 14px 0 0 rgba(168, 139, 4,0.1) inset, 0 -2px 0 0 rgba(168, 139, 4,0.7) inset, 0 -4px 0 0 rgba(168, 139, 4,0.6) inset, 0 -6px 0 0 rgba(168, 139, 4,0.5) inset, 0 -8px 0 0 rgba(168, 139, 4,0.4) inset, 0 -10px 0 0 rgba(168, 139, 4,0.3) inset, 0 -12px 0 0 rgba(168, 139, 4,0.2) inset, 0 -14px 0 0 rgba(168, 139, 4,0.1) inset
+ transform-style: preserve-3d
+ position: absolute
+ background:#FCD107
+ width: 16px 
+ height:20px
+ display: flex
+ align-items: center
+ justify-content: center
+ transform:  rotateY(calc(var(--j) * -10deg)) translateZ(50px)
+              
+
+.part > span
+ font-family: 'Dancing Script', cursive
+ font-weight: bold
+ color: $colorRing
+ text-shadow:1px 1px 5px rgb(252, 209, 7)
+ transform: rotateY(180deg)
+
+// Animacion 3
+$numLettersText1: 10
+$fontSize: 16px
+$sceneColor: #C9AA93
+$spinColor: #937C6B
+.content-text
+ color: #4A3120
+ background: #C9AA93
+ overflow: hidden
+ font-family: 'Courier New', Courier, monospace
+ text-shadow: 1px 1px 0 black
+ width: 150px
+ height: 150px
+ box-shadow: 0 0 1px 1px black
+
+p.text-1
+ font-size: $fontSize
+ position: relative
+ margin: 0
+ &:before , &:after
+  content: ""
+  position: absolute
+  height: 100%
+  top: 0
+  left:0
+ &:before
+  /* Type */
+  width: 100%
+  background: $sceneColor
+  z-index: 10
+ &:after
+  /* Blink */
+  width: calc( $fontSize / 5 )
+  height: 100%
+  left:0
+  background: $spinColor
+  z-index: 500
+  opacity: 1
+
+.moveScene::before
+ @include moveSceneType($numLetters : $numLettersText1)
+.typingEffect::after
+ @include typingEffect($numLetters : $numLettersText1)
+
+// Animacion 4
+$sizeContentAnimation4: 150px
+@keyframes caer 
+ to
+  background-position-y: 300px
+@keyframes parallax
+ 100%
+  transform: translateY(2px) translateX(2px)
+  
+  
+.content-parallax
+ width: $sizeContentAnimation4
+ height: $sizeContentAnimation4 
+ box-shadow: 0 0 0 1px black
+ background-image: url('img/fondo.jpg')
+ background-size: $sizeContentAnimation4 $sizeContentAnimation4
+ background-repeat: repeat-y
+ background-position-y: 0px
+ animation: caer linear 2s infinite 
+ display: flex
+ justify-content: center
+ align-content: center
+ position: relative
+ overflow: hidden
+
+.content-parallax > div
+  width: 150px
+  height: 150px
+  position: relative
+  display: flex
+  justify-content: center
+  align-content: center
+  transform: rotateZ(10deg)
+  
+.alice
+ display: flex
+ justify-content: center
+ align-content: center
+ width: 150px
+ height: 300px
+ z-index: 1000
+ background-image: url('img/alice.png')
+ background-size: 150px 300px
+ background-repeat: repeat-y
+ background-position-y: 0px
+ position: absolute
+ transform: translateY(-2px) translateX(-2px)
+ animation-name: caer, parallax
+ animation-iteration-count: infinite, infinite 
+ animation-duration: 4s, 0.5s
+ animation-direction: normal, alternate-reverse
+ animation-timing-function: linear, ease-in-out
+ top: -75px
