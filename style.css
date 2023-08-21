@@ -370,6 +370,9 @@ i {
 }
 
 .content-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #4A3120;
   background: #C9AA93;
   overflow: hidden;
@@ -500,6 +503,11 @@ p.text-1:after {
 
   .btn-2 {
     justify-content: flex-start;
+  }
+
+  .titulo {
+    box-sizing: border-box;
+    padding: 0 45px;
   }
 
   .descripcion {
